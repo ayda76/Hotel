@@ -226,7 +226,7 @@ SWAGGER_SETTINGS = {
     'drf_yasg.inspectors.SimpleFieldInspector',
     'drf_yasg.inspectors.StringDefaultFieldInspector',
 ],
-"DEFAULT_AUTO_SCHEMA_CLASS":"Visit.SwaggerSchema.CustomAutoSchema"
+"DEFAULT_AUTO_SCHEMA_CLASS":"Hotel.SwaggerSchema.CustomAutoSchema"
 }
 
 
@@ -286,7 +286,7 @@ TINYMCE_DEFAULT_CONFIG = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://visit_redis:6379/5",
+        "LOCATION": "redis://hotel_redis:6379/5",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
