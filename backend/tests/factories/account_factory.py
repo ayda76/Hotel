@@ -2,7 +2,7 @@ import factory
 from faker import Faker
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from account_app.models import Account, Employee,Guest
+from account.models import Account, Employee,Guest
 from django.contrib.auth.models import User
 
 fake=Faker()
