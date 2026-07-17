@@ -29,7 +29,7 @@ from django.conf import settings
 urlpatterns = [
     
     path('admin/', admin.site.urls),
-    # path("account/", include("account.api.urls")),
+    path("account/", include("account.api.urls")),
     # path("room/", include("room.api.urls")),
     # path("reservation/", include("reservation.api.urls")),
 
