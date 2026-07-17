@@ -35,22 +35,22 @@ class AccountFactory(factory.django.DjangoModelFactory):
         )
     )
 
-class EmployeeFactory(factory.django.DjnagoModelFactory):
+class EmployeeFactory(factory.django.DjangoModelFactory):
     class Meta:
         model=Employee   
-    account_related=factory.subFactory(AccountFactory)
-    employee_code=factory.Faker("name")
+    account_related=factory.SubFactory(AccountFactory)
+    employee_code=factory.Faker("bothify", text="EMP#####")
     job_title=factory.Faker("name")
     address=factory.Faker("text")
     phone=factory.Faker("numerify", text="0912578976")
-    national_id=factory.Faker("numerify", text="1363310783")
+    national_id=factory.LazyFunction(lambda: fake.numerify(text="#" * 11))
 
 
 class GuestFactory(factory.django.DjangoModelFactory):
     class Meta:
         model=Guest
         
-    account_related=factory.subFactory(AccountFactory)
+    account_related=factory.SubFactory(AccountFactory)
     passport_img = factory.LazyFunction(
         lambda: SimpleUploadedFile(
             "passport_img.jpg",
