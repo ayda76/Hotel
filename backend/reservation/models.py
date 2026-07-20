@@ -37,29 +37,35 @@ class Reservation(models.Model):
 
     @property
     def reservation_dates(self):
-        day_num = self.days_reservation
+        
+        
+        if self.checkin_date== self.checkout_date:
+            return [{
+                "date":self.checkin_date,
+                "shift":Shift.FULLDAY
+            }]
         
         dates=[]
-
+        day_num = self.days_reservation 
+        
         if self.checkin_shift==Shift.DAY: 
-            day_num=day_num-1
             dates.append({
                 "date":self.checkin_date,
-                "shfit":Shift.FULLDAY
+                "shift":Shift.FULLDAY
             })
         else:
             dates.append({
                 "date":self.checkin_date,
-                "shfit":Shift.NIGHT
+                "shift":Shift.NIGHT
             })
             
         for n in range(1, day_num + 1):
             dates.append({
                 "date":self.checkin_date+timedelta(days=n),
-                "shfit":Shift.FULLDAY
+                "shift":Shift.FULLDAY
             })
         if self.checkout_shift==Shift.DAY:
-            dates[-1]['shfit']=Shift.DAY
+            dates[-1]['shift']=Shift.DAY
             
         return dates
     
