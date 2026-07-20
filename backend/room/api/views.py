@@ -30,3 +30,9 @@ class RoomViewSet(viewsets.ModelViewSet):
         if self.request.method == 'POST'or'PUT'or'PATCH':
             return RoomSimpleSerializer
         return RoomSerializer
+    
+    @action(detail=True, methods=['get'])
+    def roomchart(self,request,pk):
+        room_insatnce=self.get_object()
+        reservations=room_insatnce.room_reservation.all()
+        
