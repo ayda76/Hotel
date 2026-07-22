@@ -19,3 +19,8 @@ class RoomSimpleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = '__all__'
+        
+        
+class RoomChartSerializer(serializers.Serializer):
+    start_point = serializers.DateField()
+    end_point = serializers.DateField()
