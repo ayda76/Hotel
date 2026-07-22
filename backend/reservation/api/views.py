@@ -14,7 +14,7 @@ class ReservationViewSet(viewsets.ModelViewSet):
     my_tags = ["Reservation"]
     
     def get_serializer_class(self, *args, **kwargs):
-        if self.request.method == 'POST'or'PUT'or'PATCH':
+        if self.request.method in ['POST'or'PUT'or'PATCH']:
             return ReservationSimpleSerializer
         return ReservationSerializer
     

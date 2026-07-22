@@ -21,4 +21,15 @@ class Room(models.Model):
     roomtype_related = models.ForeignKey(RoomType,related_name='type_room',on_delete=models.CASCADE)
     price            = models.PositiveIntegerField(default=0)
     floor            = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.room_code
     
+    @property
+    def occupied_dates(self):
+        from reservation.models import Reservation,ReservationStatus
+        all_reservations=Reservation.objects.filter(room=self,status=ReservationStatus.APPROVED)   
+        dates=[]
+        for reserve in all_reservations:
+            dates.extend(reserve.reservation_dates)
+        return dates
