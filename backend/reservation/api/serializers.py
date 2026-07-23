@@ -9,6 +9,24 @@ class ReservationSimpleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
         fields = '__all__'
+        
+    def validate(self, attrs):
+
+        room = attrs["room_related"]
+        checkin = attrs["checkin_date"]
+        checkout = attrs["checkout_date"]
+
+        if Reservation.objects.filter(
+            room_related=room,
+            checkin_date__lt=checkout,
+            checkout_date__gt=checkin,
+        ).exists():
+
+            raise serializers.ValidationError(
+                "Room is already reserved."
+            )
+
+        return attrs
                
 class ReservationSerializer(serializers.ModelSerializer):
     guest_related=GuestSerializer(required=False)
