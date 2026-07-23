@@ -1,6 +1,6 @@
 from rest_framework import generics, viewsets
 from rest_framework.exceptions import ValidationError
-
+from django.db import transaction
 from room.api.serializers import (ReservationSerializer,
                                   ReservationSimpleSerializer)
 
@@ -14,16 +14,19 @@ class ReservationViewSet(viewsets.ModelViewSet):
     my_tags = ["Reservation"]
     
     def get_serializer_class(self, *args, **kwargs):
-        if self.request.method in ['POST'or'PUT'or'PATCH']:
+        if self.request.method in ['POST','PUT','PATCH']:
             return ReservationSimpleSerializer
         return ReservationSerializer
     
     def perform_create(self,serializer):
-        try:
+        with transaction.atomic(): 
             account_login=Account.get_user_jwt(self,self.request)
             guest_related=Guest.objects.get(account_related=account_login)
-            if guest_related is not None:
-                instance=serializer.save(guest_related=guest_related)
-                return instance
-        except:
-            raise ValidationError({"detail":"reservation failed"}) 
+
+            serializer.save(guest_related=guest_related)
+                
+ 
+
+        
+
+

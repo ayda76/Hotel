@@ -44,8 +44,8 @@ class RoomViewSet(viewsets.ModelViewSet):
         end_point = serializer.validated_data["end_point"]
         
         reservations=Reservation.objects.filter(room_related=room_insatnce,
-                                                checkin_date__lte=end_point,
-                                                checkout_date__gte=start_point)
+                                                checkin_date__lt=end_point,
+                                                checkout_date__gt=start_point)
         dates=[]
         for rs in reservations:
             dates.extend(rs.reservation_dates)
