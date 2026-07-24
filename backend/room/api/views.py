@@ -1,8 +1,5 @@
 from rest_framework import generics, viewsets
-from django.contrib.auth import authenticate
 from rest_framework.response import Response
-from rest_framework import status
-from datetime import datetime, timedelta, date
 from rest_framework.decorators import action
 
 from room.api.serializers import (RoomTypeSerializer,

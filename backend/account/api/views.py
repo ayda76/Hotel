@@ -50,7 +50,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     pagination_class=None
     my_tags = ["Account"]
     def get_serializer_class(self, *args, **kwargs):
-        if self.request.method == 'POST'or'PUT'or'PATCH':
+        if self.request.method in ['POST','PUT','PATCH']:
             return EmployeeSimpleSerializer
         return EmployeeSerializer
     
@@ -61,7 +61,7 @@ class GuestViewSet(viewsets.ModelViewSet):
     my_tags = ["Account"]
     
     def get_serializer_class(self, *args, **kwargs):
-        if self.request.method == 'POST'or'PUT'or'PATCH':
+        if self.request.method in ['POST','PUT','PATCH']:
             return GuestSimpleSerializer
         return GuestSerializer
         
