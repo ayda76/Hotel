@@ -35,3 +35,9 @@ class ReservationSerializer(serializers.ModelSerializer):
         model = Reservation
         fields = '__all__'
         
+        
+class ResultReservationSerializer(serializers.Serializer):
+    decision = serializers.CharField( choices=[
+        ("approve", "approve"), 
+        ("reject", "reject")
+        ])

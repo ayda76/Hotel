@@ -6,6 +6,7 @@ from room.models import Room
 class ReservationStatus(models.TextChoices):
     SUBMITTED = "submitted", "Submitted"
     APPROVED = "approved", "Approved"
+    REJECTED = "rejected", "Rejected"
     CANCELED = "canceled", "Canceled"
 
 
